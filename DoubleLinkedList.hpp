@@ -86,16 +86,27 @@ bool isEmptyData(Perpustakaan data, bool single = false) {
 }
 
 void urutData(node *head) {
+  // Jika linked list kosong, tidak perlu dilakukan pengurutan
   if (head == NULL) return;
+
+  // Inisialisasi jarak awal dengan 1
   int jarak = 1;
   bool sudah = true;
+
+  // Menentukan jarak antar elemen pada iterasi pertama
+  // dengan mengalikan panjang id data pertama dengan 3 dan menambahkan 1
+  // hingga jarak melebihi panjang id tersebut dibagi 3
   while (jarak <= head->data.id.length() / 3) {
-    jarak = jarak * 3 + 1;
+    jarak *= (3 + 1);
   }
+
+  // Pengurutan dengan menggunakan algoritma Shell Sort
   while (jarak > 0) {
     sudah = true;
     node *curr = head;
     while (curr->next != NULL) {
+      // Jika dua elemen yang dibandingkan tidak terurut, lakukan pertukaran
+      // data
       if (curr->data.id.compare(curr->next->data.id) > 0) {
         Perpustakaan temp = curr->data;
         curr->data = curr->next->data;
@@ -104,8 +115,9 @@ void urutData(node *head) {
       }
       curr = curr->next;
     }
+    // Jika tidak ada lagi pertukaran yang dilakukan, kurangi jarak antar elemen
     if (sudah) {
-      jarak = jarak / 3;
+      jarak /= 3;
     }
   }
 }
