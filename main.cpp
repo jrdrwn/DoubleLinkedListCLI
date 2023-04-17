@@ -40,7 +40,7 @@ int main() {
                           [&] {
                             if (isEmptyData(data)) {
                               data.id = random_string();
-                              tambahData(&head, data);
+                              tambahData(&head, &tail, data);
                               data = {};
                             }
                           }) |

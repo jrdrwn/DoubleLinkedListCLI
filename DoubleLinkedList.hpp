@@ -16,13 +16,13 @@ struct node {
 
 node *head, *tail;
 
-void tambahData(node **head, Perpustakaan data) {
+void tambahData(node **head, node **tail, Perpustakaan data) {
   node *newNode = new node;
   newNode->data = data;
   newNode->next = newNode->prev = NULL;
 
   if (*head == NULL) {
-    *head = newNode;
+    *head = *tail = newNode;
   } else {
     node *curr = *head;
     while (curr->next != NULL) {
@@ -30,6 +30,7 @@ void tambahData(node **head, Perpustakaan data) {
     }
     curr->next = newNode;
     newNode->prev = curr;
+    *tail = newNode;
   }
 }
 
